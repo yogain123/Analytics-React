@@ -1,8 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import ReactGa from "react-ga";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    ReactGa.initialize("UA-171681373-1");
+    ReactGa.pageview("/");
+  }, []);
+
+  const clickMe = () => {
+    ReactGa.event({
+      category: "Button",
+      action: "Click the button from / page",
+    });
+    alert("Send Information to Google Analytics");
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +23,10 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+        <button type="button" onClick={() => clickMe()}>
+          Send Analytics
+        </button>
       </header>
     </div>
   );
